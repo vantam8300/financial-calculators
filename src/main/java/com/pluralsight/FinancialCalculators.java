@@ -66,12 +66,37 @@ public class FinancialCalculators {
 
     // future value
     private static void futureValue() {
+        System.out.print("what is your deposit: ");
+        float deposit = scanner.nextFloat();
 
+        System.out.print("what is your interest rate: ");
+        float interestRate = scanner.nextFloat() ;
+
+        System.out.print("what is deposit length in years: ");
+        int length = scanner.nextInt();
+
+        float total = (float) (deposit * Math.pow((1 + interestRate / 100f / 365f), 365f * length));
+        float earn = total - deposit;
+
+        System.out.printf("If you deposit $%.2f in a CD that earns %.2f%% interest and matures in %d years, your CD's ending balance will be $%.2f and you would have earned $%.2f in interest",
+                deposit, interestRate, length, total, earn);
     }
 
     // present value
     private static void presentValue() {
+        System.out.print("what is your monthly payout: ");
+        float monthlyPayout = scanner.nextFloat();
 
+        System.out.print("what is your interest rate: ");
+        float interestRate = scanner.nextFloat() ;
+        float monthlyInterestRate = interestRate / 12 / 100;
+
+        System.out.print("year to pay out: ");
+        int lengthInYear = scanner.nextInt();
+
+        double requiredInvestment =  monthlyPayout * (1 - (1 / Math.pow(1 + monthlyInterestRate, lengthInYear * 12))) /monthlyInterestRate;
+
+        System.out.printf("To fund an annuity that pays $%.2f monthly for %d years and earns an expected %.2f%% interest, you would need to invest $%.2f today.", monthlyPayout, lengthInYear, interestRate, requiredInvestment);
     }
 
 }
